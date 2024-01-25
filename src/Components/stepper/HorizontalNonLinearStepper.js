@@ -24,6 +24,7 @@ const HorizontalNonLinearStepper = () => {
   const isLastStep = () => {
     return activeStep === totalSteps() - 1;
   };
+  
 
   const allStepsCompleted = () => {
     return completedSteps() === totalSteps();
