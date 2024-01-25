@@ -79,8 +79,8 @@ const PersonalDetailForm = () => {
           })}
           placeholder="mobile"
           label="Mobile Number"
-          type="number"
           helperText={errors && errors.mobile?.message}
+          type="number"
           error={errors && errors.mobile?.message}
         />
 
