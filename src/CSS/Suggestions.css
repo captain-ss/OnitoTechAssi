@@ -1,5 +1,7 @@
 .SuggetionsContainer{
     display: flex;
+    position: absolute;
+    z-index: 4;
     flex-direction: column;
     gap: 2px;
     max-height: 45vh;
@@ -7,6 +9,7 @@
     overflow-y: scroll;
     overflow-x: hidden;
     background-color: aliceblue;
+
 }
 .SuggetionsContainer::-webkit-scrollbar{
     display: none;
