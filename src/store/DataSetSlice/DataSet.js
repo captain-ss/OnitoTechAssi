@@ -16,4 +16,4 @@ let defaultAddressSlice = createSlice({
 });
 export default defaultAddressSlice.reducer;
 
-export const defaultAddressAction = defaultAddressSlice.actions;
+export const  defaultAddressAction = defaultAddressSlice.actions;

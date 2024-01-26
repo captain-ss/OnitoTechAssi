@@ -1,0 +1,23 @@
+.SuggetionsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 45vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: aliceblue;
+}
+.SuggetionsContainer::-webkit-scrollbar{
+    display: none;
+}
+.SuggetionsContainer span{
+    display: inline-block;
+    padding: .3vw 1vw ;
+    border-radius: .3vw;
+}
+.SuggetionsContainer span:hover{
+    background-color: rgb(198, 225, 243);
+}
+
+

@@ -7,8 +7,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import PersonalDetailForm from "../PersonalDetailForm/PersonalDetailForm";
 import AddressDetailForm from "../AddressDetailForm/AddressDetailForm";
-const steps = ["PersonalDetail", "Address Detail"];
 
+const steps = ["PersonalDetail", "Address Detail"];
 const HorizontalNonLinearStepper = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
@@ -63,7 +63,8 @@ const HorizontalNonLinearStepper = () => {
   return (
     <div
     style={{
-      paddingLeft:"15%"
+      paddingLeft:"15%",
+      paddingTop:"2vw"
     }}
     >
       <Box sx={{ width: "80%" }}>
