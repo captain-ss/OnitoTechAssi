@@ -5,7 +5,8 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import FormHelperText from '@mui/material/FormHelperText';
+import { useRef } from "react";
+import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 
 const PersonalDetailForm = () => {
@@ -17,6 +18,7 @@ const PersonalDetailForm = () => {
   const onSubmitHandler = (data) => {
     console.log(data);
   };
+
   return (
     <div
       style={{
@@ -44,8 +46,13 @@ const PersonalDetailForm = () => {
         />
         <TextField
           {...register("dateOfBirthorAge", {
-            required: "Date or Age must be a positive number",
-            validate: (value) => parseInt(value, 10) > 0,
+            required: "Date or Age isrequired",
+            validate: (value) => {
+              if (!(parseInt(value, 10) > 0)) {
+                return "Must be a positive number";
+              }
+              return true;
+            },
           })}
           placeholder="DD/MM/YYYY or Age in years"
           label="DOB or Age "
@@ -53,10 +60,9 @@ const PersonalDetailForm = () => {
           error={errors && errors.dateOfBirthorAge?.message}
         />
 
-        <FormControl sx={{ m: 1, minWidth: 120 }} 
-        
-        error={errors && errors.sex?.message}
-
+        <FormControl
+          sx={{ minWidth: 180 }}
+          error={errors && errors.sex?.message}
         >
           <InputLabel id="demo-simple-select-label">Sex</InputLabel>
           <Select
@@ -70,7 +76,9 @@ const PersonalDetailForm = () => {
             <MenuItem value="Male">Male</MenuItem>
             <MenuItem value="Female">Female</MenuItem>
           </Select>{" "}
-          {errors.sex?.message && <FormHelperText>{errors.sex?.message}</FormHelperText>}
+          {errors.sex?.message && (
+            <FormHelperText>{errors.sex?.message}</FormHelperText>
+          )}
         </FormControl>
         <TextField
           {...register("mobile", {
@@ -80,11 +88,11 @@ const PersonalDetailForm = () => {
           placeholder="mobile"
           label="Mobile Number"
           helperText={errors && errors.mobile?.message}
-          type="number"
           error={errors && errors.mobile?.message}
+          type="number"
         />
 
-        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <FormControl sx={{ minWidth: 240 }}>
           <InputLabel id="demo-simple-select-label">
             GovermentIssueIDType
           </InputLabel>
@@ -101,12 +109,15 @@ const PersonalDetailForm = () => {
           </Select>
         </FormControl>
         <TextField
-          {...register("GovermentIssueID")}
+          {...register("GovermentIssueID",{
+            required:"Id is required"
+          })}
           placeholder="GovermentIssueID"
           label="GovermentIssueID"
+          helperText={errors && errors.GovermentIssueID?.message}
+          error={errors && errors.GovermentIssueID?.message}
         />
 
-        <br />
         <Button variant="contained" type="submit">
           submit
         </Button>

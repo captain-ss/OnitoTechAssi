@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-let defaultAddressSlice = createSlice({
+let DataSlice = createSlice({
   name: "defaultAddress",
   initialState: {
-    defaultAddress: "",
+    data: [{}],
   },
   reducers: {
     setDefaultAddress(state, action) {
-      state.defaultAddress = action.payload.id;
+      state.data = action.payload;
     },
     removeDefaultAddress(state, action) {
       state.defaultAddress = "";
     },
   },
 });
-export default defaultAddressSlice.reducer;
+export default DataSlice.reducer;
 
-export const  defaultAddressAction = defaultAddressSlice.actions;
+export const  DataSliceAction = DataSlice.actions;

@@ -113,21 +113,21 @@ const AddressDetailForm = () => {
         action=""
       >
         <TextField
-          {...register("mobile")}
-          placeholder="mobile"
-          label="mobile"
+          {...register("Address")}
+          placeholder="Address"
+          label="Address"
           type="text"
         />
         <TextField
-          {...register("mobile")}
-          placeholder="mobile"
-          label="mobile"
+          {...register("State")}
+          placeholder="State"
+          label="State"
           type="text"
         />
         <TextField
-          {...register("mobile")}
-          placeholder="mobile"
-          label="mobile"
+          {...register("City")}
+          placeholder="City"
+          label="City"
           type="text"
         />
         <div
@@ -138,9 +138,9 @@ const AddressDetailForm = () => {
         >
           <TextField
             onClick={handleOpen}
-            placeholder="mobile"
+            placeholder="Country"
             onChange={handleFilter}
-            label="mobile"
+            label="Country"
             type="text"
           />
           <Suggestions
@@ -148,6 +148,16 @@ const AddressDetailForm = () => {
             country={countryArr.filteredCountry}
           />
         </div>
+            <TextField
+              {...register("Pincode")}
+              placeholder="Pincode"
+              label="Pincode"
+              type="Number"
+            />
+
+<Button variant="contained" type="submit">
+          submit
+        </Button>
       </form>
     </div>
   );
