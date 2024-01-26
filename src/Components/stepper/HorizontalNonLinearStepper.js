@@ -7,9 +7,21 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import PersonalDetailForm from "../PersonalDetailForm/PersonalDetailForm";
 import AddressDetailForm from "../AddressDetailForm/AddressDetailForm";
-
+import { useNavigate } from "react-router-dom";
+import icon1 from "../../assets/animatedIcon/Icon1";
+import Lottie from "react-lottie";
 const steps = ["PersonalDetail", "Address Detail"];
 const HorizontalNonLinearStepper = () => {
+  const navigate = useNavigate();
+  const defaultOptions = {
+    loop: false,
+    autoplay: true,
+    animationData: icon1,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
 
@@ -24,7 +36,6 @@ const HorizontalNonLinearStepper = () => {
   const isLastStep = () => {
     return activeStep === totalSteps() - 1;
   };
-  
 
   const allStepsCompleted = () => {
     return completedSteps() === totalSteps();
@@ -62,10 +73,10 @@ const HorizontalNonLinearStepper = () => {
 
   return (
     <div
-    style={{
-      paddingLeft:"15%",
-      paddingTop:"2vw"
-    }}
+      style={{
+        paddingLeft: "15%",
+        paddingTop: "2vw",
+      }}
     >
       <Box sx={{ width: "80%" }}>
         <Stepper nonLinear activeStep={activeStep}>
@@ -82,10 +93,22 @@ const HorizontalNonLinearStepper = () => {
             <React.Fragment>
               <Typography sx={{ mt: 2, mb: 1 }}>
                 All steps completed - you&apos;re finished
+                <Lottie options={defaultOptions} height={400} width={400} />
               </Typography>
               <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                 <Box sx={{ flex: "1 1 auto" }} />
-                <Button onClick={handleReset}>Reset</Button>
+                <Button variant="contained" onClick={handleReset}>
+                  Fill Again
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{ ml: 1 }}
+                  onClick={() => {
+                    navigate("/table");
+                  }}
+                >
+                  Go To Table
+                </Button>
               </Box>
             </React.Fragment>
           ) : (
@@ -96,6 +119,7 @@ const HorizontalNonLinearStepper = () => {
               </Typography>
               <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                 <Button
+                  variant="contained"
                   color="inherit"
                   disabled={activeStep === 0}
                   onClick={handleBack}
@@ -104,7 +128,7 @@ const HorizontalNonLinearStepper = () => {
                   Back
                 </Button>
                 <Box sx={{ flex: "1 1 auto" }} />
-                <Button onClick={handleNext} sx={{ mr: 1 }}>
+                <Button variant="contained" onClick={handleNext} sx={{ mr: 1 }}>
                   Next
                 </Button>
                 {activeStep !== steps.length &&
@@ -116,7 +140,7 @@ const HorizontalNonLinearStepper = () => {
                       Step {activeStep + 1} already completed
                     </Typography>
                   ) : (
-                    <Button onClick={handleComplete}>
+                    <Button variant="contained" onClick={handleComplete}>
                       {completedSteps() === totalSteps() - 1
                         ? "Finish"
                         : "Complete Step"}
