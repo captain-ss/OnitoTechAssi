@@ -1,0 +1,7 @@
+.dataSet_container{
+    padding: 1vw 0vw;
+    background-color: aliceblue;
+}
+.dataSet_container thead{
+    background-color: rgb(105, 160, 83,.6);
+}
