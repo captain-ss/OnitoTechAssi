@@ -5,11 +5,11 @@ import { Button, TextField } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useEffect } from "react";
-import { UseSelector,useDispatch } from "react-redux";
+import { UseSelector, useDispatch } from "react-redux";
 import { DataSliceAction } from "../../store/DataSetSlice/DataSet";
 import Suggestions from "./Suggestions";
-const AddressDetailForm = ({formData ,handleComplete}) => {
-  const dispatch=useDispatch()
+const AddressDetailForm = ({ formData, handleComplete }) => {
+  const dispatch = useDispatch();
   const [dropDown, setDropDown] = useState(false);
   const {
     register,
@@ -28,13 +28,13 @@ const AddressDetailForm = ({formData ,handleComplete}) => {
       DataSliceAction.setTableData({
         ...formData,
         ...data,
-        countrySelected
+        countrySelected,
       })
-    )
-    handleComplete();
+    );
     
+    handleComplete();
   };
-  
+
   const handleOpen = () => setDropDown(true);
   const handleClose = (value) => {
     setCountrySelected(value);

@@ -16,15 +16,16 @@ export class Dataset extends Component {
       },
     };
     this.$el = $(this.el);
+    console.log(this.$el);
     this.$el.DataTable({
       data: this.props.data,
       columns: [
-        { data: "name" },
-        { data: "dateOfBirthorAge" },
-        { data: "mobile" },
-        { data: "sex" },
-        { data: "GovermentIssueID" },
-        { data: "GovermentIssueIDType" },
+        { data: "name",defaultContent: "" },
+        { data: "dateOfBirthorAge" ,defaultContent: ""},
+        { data: "mobile" ,defaultContent: ""},
+        { data: "sex" ,defaultContent: ""},
+        { data: "GovermentIssueID",defaultContent: "" },
+        { data: "GovermentIssueIDType",defaultContent: "" },
         { data: "countrySelected", defaultContent: "" },
         { data: "City", defaultContent: "" },
         { data: "State", defaultContent: "" },
