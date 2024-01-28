@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 let DataSlice = createSlice({
-  name: "defaultAddress",
+  name: "TableData",
   initialState: {
-    data: [{}],
+    tableData: [],
   },
   reducers: {
-    setDefaultAddress(state, action) {
-      state.data = action.payload;
-    },
-    removeDefaultAddress(state, action) {
-      state.defaultAddress = "";
+    setTableData(state, action) {
+      const newItem = action.payload;
+      state.tableData.push({
+        ...newItem
+      })
     },
   },
 });

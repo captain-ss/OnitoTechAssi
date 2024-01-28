@@ -4,8 +4,12 @@ import axios from "axios";
 import { Button, TextField } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useEffect } from "react";
+import { UseSelector,useDispatch } from "react-redux";
+import { DataSliceAction } from "../../store/DataSetSlice/DataSet";
 import Suggestions from "./Suggestions";
-const AddressDetailForm = ({ setFormData }) => {
+const AddressDetailForm = ({formData ,handleComplete}) => {
+  const dispatch=useDispatch()
   const [dropDown, setDropDown] = useState(false);
   const {
     register,
@@ -20,16 +24,17 @@ const AddressDetailForm = ({ setFormData }) => {
 
   // will directly update input value
   const onSubmitHandler = (data) => {
-    setFormData((prev) => ({
-      ...prev,
-      ...data,
-      countrySelected,
-    }));
-    console.log({
-      ...data,
-      countrySelected,
-    });
+    dispatch(
+      DataSliceAction.setTableData({
+        ...formData,
+        ...data,
+        countrySelected
+      })
+    )
+    handleComplete();
+    
   };
+  
   const handleOpen = () => setDropDown(true);
   const handleClose = (value) => {
     setCountrySelected(value);
@@ -45,7 +50,6 @@ const AddressDetailForm = ({ setFormData }) => {
     const filterArr = countryArr?.country?.filter((item) =>
       item.name?.common.toLowerCase().includes(value.toLowerCase())
     );
-    console.log(filterArr);
     setCountryArr((prevData) => ({
       ...prevData,
       filteredCountry: filterArr,
@@ -68,7 +72,6 @@ const AddressDetailForm = ({ setFormData }) => {
   if (isLoading) {
     return <h5>Loading Countries</h5>;
   }
-  console.log(country);
   return (
     <div>
       <form

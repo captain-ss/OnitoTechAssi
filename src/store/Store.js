@@ -3,7 +3,7 @@ import DataReducers from "./DataSetSlice/DataSet";
 
 const store = configureStore({
   reducer: {
-    DataAll: DataReducers,
+    TableData: DataReducers,
   },
 });
 

@@ -7,17 +7,19 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
-
-const PersonalDetailForm = () => {
+const PersonalDetailForm = ({setFormData,handleComplete}) => {
+ 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmitHandler = (data) => {
-    console.log(data);
+   setFormData((prev)=>({
+    ...prev,...data
+   }))
+   handleComplete();
   };
-
   return (
     <div
       style={{
@@ -72,6 +74,7 @@ const PersonalDetailForm = () => {
             id="demo-simple-select"
             label="Sex"
           >
+            <MenuItem value=""></MenuItem>
             <MenuItem value="Male">Male</MenuItem>
             <MenuItem value="Female">Female</MenuItem>
           </Select>{" "}
@@ -82,7 +85,10 @@ const PersonalDetailForm = () => {
         <TextField
           {...register("mobile", {
             required: "Please Fill Valid Number",
-            pattern: /^[6-9]d{9}$/,
+            pattern: {
+              value:/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/,
+              message: "invalid Number"
+            }
           })}
           placeholder="mobile"
           label="Mobile Number"
@@ -103,8 +109,8 @@ const PersonalDetailForm = () => {
             })}
             label="GovermentIssueIDType"
           >
-            <MenuItem value={10}>AdharCard Number</MenuItem>
-            <MenuItem value={20}>PAN Number</MenuItem>
+            <MenuItem value="AdharCard">AdharCard Number</MenuItem>
+            <MenuItem value="Pan">PAN Number</MenuItem>
           </Select>
         </FormControl>
         <TextField

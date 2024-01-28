@@ -12,11 +12,12 @@ import icon1 from "../../assets/animatedIcon/Icon1";
 import Lottie from "react-lottie";
 import { useState } from "react";
 const steps = ["PersonalDetail", "Address Detail"];
+
 const HorizontalNonLinearStepper = () => {
-const [formData, setFormData] = useState(null)
+  const [formData, setFormData] = useState(null);
   const navigate = useNavigate();
   const defaultOptions = {
-    loop: false,
+    loop: true,
     autoplay: true,
     animationData: icon1,
     rendererSettings: {
@@ -84,9 +85,7 @@ const [formData, setFormData] = useState(null)
         <Stepper nonLinear activeStep={activeStep}>
           {steps.map((label, index) => (
             <Step key={label} completed={completed[index]}>
-              <StepButton color="inherit" onClick={handleStep(index)}>
-                {label}
-              </StepButton>
+              <StepButton color="inherit">{label}</StepButton>
             </Step>
           ))}
         </Stepper>
@@ -94,7 +93,7 @@ const [formData, setFormData] = useState(null)
           {allStepsCompleted() ? (
             <React.Fragment>
               <Typography sx={{ mt: 2, mb: 1 }}>
-                All steps completed - you&apos;re finished
+                "All steps completed - you&apos;re finished"
                 <Lottie options={defaultOptions} height={400} width={400} />
               </Typography>
               <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
@@ -116,10 +115,20 @@ const [formData, setFormData] = useState(null)
           ) : (
             <React.Fragment>
               <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-                {activeStep + 1 === 1 && <PersonalDetailForm  setFormData={setFormData}/>}
-                {activeStep + 1 === 2 && <AddressDetailForm setFormData={setFormData}/>}
+                {activeStep + 1 === 1 && (
+                  <PersonalDetailForm
+                    handleComplete={handleComplete}
+                    setFormData={setFormData}
+                  />
+                )}
+                {activeStep + 1 === 2 && (
+                  <AddressDetailForm
+                    handleComplete={handleComplete}
+                    formData={formData}
+                  />
+                )}
               </Typography>
-              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+              {/* <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                 <Button
                   variant="contained"
                   color="inherit"
@@ -148,7 +157,7 @@ const [formData, setFormData] = useState(null)
                         : "Complete Step"}
                     </Button>
                   ))}
-              </Box>
+              </Box> */}
             </React.Fragment>
           )}
         </div>
