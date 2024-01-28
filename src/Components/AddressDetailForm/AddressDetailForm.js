@@ -5,7 +5,7 @@ import { Button, TextField } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import Suggestions from "./Suggestions";
-const AddressDetailForm = () => {
+const AddressDetailForm = ({ setFormData }) => {
   const [dropDown, setDropDown] = useState(false);
   const {
     register,
@@ -20,7 +20,15 @@ const AddressDetailForm = () => {
 
   // will directly update input value
   const onSubmitHandler = (data) => {
-    console.log({ ...data, countrySelected });
+    setFormData((prev) => ({
+      ...prev,
+      ...data,
+      countrySelected,
+    }));
+    console.log({
+      ...data,
+      countrySelected,
+    });
   };
   const handleOpen = () => setDropDown(true);
   const handleClose = (value) => {
@@ -31,8 +39,8 @@ const AddressDetailForm = () => {
   const handleFilter = (e) => {
     const value = e.target.value;
     setCountrySelected(value);
-    if(!dropDown){
-      setDropDown(!dropDown)
+    if (!dropDown) {
+      setDropDown(!dropDown);
     }
     const filterArr = countryArr?.country?.filter((item) =>
       item.name?.common.toLowerCase().includes(value.toLowerCase())

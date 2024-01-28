@@ -10,8 +10,10 @@ import AddressDetailForm from "../AddressDetailForm/AddressDetailForm";
 import { useNavigate } from "react-router-dom";
 import icon1 from "../../assets/animatedIcon/Icon1";
 import Lottie from "react-lottie";
+import { useState } from "react";
 const steps = ["PersonalDetail", "Address Detail"];
 const HorizontalNonLinearStepper = () => {
+const [formData, setFormData] = useState(null)
   const navigate = useNavigate();
   const defaultOptions = {
     loop: false,
@@ -114,8 +116,8 @@ const HorizontalNonLinearStepper = () => {
           ) : (
             <React.Fragment>
               <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-                {activeStep + 1 === 1 && <PersonalDetailForm />}
-                {activeStep + 1 === 2 && <AddressDetailForm />}
+                {activeStep + 1 === 1 && <PersonalDetailForm  setFormData={setFormData}/>}
+                {activeStep + 1 === 2 && <AddressDetailForm setFormData={setFormData}/>}
               </Typography>
               <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                 <Button
