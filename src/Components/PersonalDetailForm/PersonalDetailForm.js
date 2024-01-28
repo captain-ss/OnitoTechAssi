@@ -12,14 +12,18 @@ const PersonalDetailForm = ({setFormData,handleComplete}) => {
   const {
     register,
     handleSubmit,
+    getValues,
+    watch,
     formState: { errors },
   } = useForm();
   const onSubmitHandler = (data) => {
+    console.log(data);
    setFormData((prev)=>({
     ...prev,...data
    }))
    handleComplete();
   };
+  const govermentIssueIDType = watch("GovermentIssueIDType");
   return (
     <div
       style={{
@@ -97,7 +101,10 @@ const PersonalDetailForm = ({setFormData,handleComplete}) => {
           type="number"
         />
 
-        <FormControl sx={{ minWidth: 240 }}>
+        <FormControl sx={{ minWidth: 240 }}
+          error={errors && errors.GovermentIssueIDType?.message}
+        
+        >
           <InputLabel id="demo-simple-select-label">
             GovermentIssueIDType
           </InputLabel>
@@ -105,23 +112,48 @@ const PersonalDetailForm = ({setFormData,handleComplete}) => {
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             {...register("GovermentIssueIDType", {
-              required: true,
+              required: "Required",
             })}
             label="GovermentIssueIDType"
           >
             <MenuItem value="AdharCard">AdharCard Number</MenuItem>
-            <MenuItem value="Pan">PAN Number</MenuItem>
+            <MenuItem value="PAN">PAN Number</MenuItem>
           </Select>
+          {errors.GovermentIssueIDType?.message && (
+            <FormHelperText>{errors.GovermentIssueIDType?.message}</FormHelperText>
+          )}
         </FormControl>
+        {govermentIssueIDType === "AdharCard" && (
         <TextField
-          {...register("GovermentIssueID",{
-            required:"Id is required"
+          {...register("GovermentIssueID", {
+            required: "ID is required",
+            pattern: {
+              value: /^[0-9]{12}$/, // Aadhar card pattern
+              message: "Please enter a valid Aadhar card number"
+            }
           })}
-          placeholder="GovermentIssueID"
+          placeholder="AadharCard Number"
           label="GovermentIssueID"
-          helperText={errors && errors.GovermentIssueID?.message}
-          error={errors && errors.GovermentIssueID?.message}
+          helperText={errors.GovermentIssueID?.message}
+          error={errors.GovermentIssueID ? true : false}
         />
+      )}
+
+      {govermentIssueIDType === "PAN" && (
+        <TextField
+          {...register("GovermentIssueID", {
+            required: "ID is required",
+            pattern: {
+              value: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, // PAN card pattern
+              message: "Please enter a valid PAN number"
+            }
+          })}
+          placeholder="PAN Number"
+          label="GovermentIssueID"
+          helperText={errors.GovermentIssueID?.message}
+          error={errors.GovermentIssueID ? true : false}
+        />
+      )}
 
         <Button variant="contained" type="submit">
           submit
