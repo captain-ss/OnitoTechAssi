@@ -138,6 +138,14 @@ const PersonalDetailForm = ({setFormData,handleComplete}) => {
           error={errors.GovermentIssueID ? true : false}
         />
       )}
+       {!govermentIssueIDType && <TextField
+          {...register("GovermentIssueID", {
+          })}
+          placeholder="PAN Number"
+          label="GovermentIssueID"
+          helperText={errors.GovermentIssueID?.message}
+          error={errors.GovermentIssueID ? true : false}
+        />}
 
       {govermentIssueIDType === "PAN" && (
         <TextField
